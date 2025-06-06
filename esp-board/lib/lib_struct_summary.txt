@@ -1,0 +1,140 @@
+# Summary of Classes and Methods in /lib (ESP32 Project)
+طی# خلاصه ساختار کلاس‌ها و متدهای پوشه lib (پروژه ESP32)
+
+## File: ntptime.py
+- **Function: time()**
+  - Args: None
+  - Description: Sends an NTP request to `pool.ntp.org` and returns the current time as a Unix timestamp (seconds since epoch). Includes logic for Y2036 fix.
+  - توضیح: یک درخواست NTP به سرور `pool.ntp.org` ارسال می‌کند و زمان فعلی را به صورت timestamp یونیکس برمی‌گرداند. منطق رفع مشکل سال ۲۰۳۶ را هم دارد.
+- **Function: **
+  - Args: None
+  - Description: Sets the system time using the NTP server. Uses `machine.RTC` to set the hardware clock (RTC).
+  - توضیح: زمان سیستم را با استفاده از سرور NTP تنظیم می‌کند و ساعت سخت‌افزاری را ست می‌کند.
+
+## File: relay_controller.py
+- **Class: RelayController**
+  - **__init__(self, pins)**
+    - Args: pins (list of pin numbers)
+    - Description: Initializes relay controller. Sets pins as output and sets initial value to 1 (off for low-trigger relays).
+    - توضیح: کنترل‌کننده رله را مقداردهی اولیه می‌کند. پین‌ها را خروجی می‌کند و مقدار اولیه را ۱ (خاموش) می‌گذارد.
+  - **on(self, channel)**
+    - Args: channel (relay channel number)
+    - Description: Turns on the specified relay (sets pin to 0).
+    - توضیح: رله مشخص شده را روشن می‌کند (پین را ۰ می‌کند).
+  - **off(self, channel)**
+    - Args: channel (relay channel number)
+    - Description: Turns off the specified relay (sets pin to 1).
+    - توضیح: رله مشخص شده را خاموش می‌کند (پین را ۱ می‌کند).
+  - **off_all(self)**
+    - Args: None
+    - Description: Turns off all relays.
+    - توضیح: همه رله‌ها را خاموش می‌کند.
+  - **on_all(self)**
+    - Args: None
+    - Description: Turns on all relays.
+    - توضیح: همه رله‌ها را روشن می‌کند.
+
+## File: servo_controler.py
+- **Class: PCA9685**
+  - **__init__(self, i2c, address=0x40)**
+    - Args: i2c (I2C object), address (I2C address, default 0x40)
+    - Description: Initializes PCA9685 driver and sets default PWM frequency to 50Hz.
+    - توضیح: درایور PCA9685 را مقداردهی اولیه می‌کند و فرکانس PWM را روی ۵۰ هرتز می‌گذارد.
+  - **write8(self, reg, value)**
+    - Args: reg (register address), value (value to write)
+    - Description: Writes a byte to the specified register of PCA9685.
+    - توضیح: یک بایت را در رجیستر مشخص شده می‌نویسد.
+  - **set_pwm_freq(self, freq_hz)**
+    - Args: freq_hz (PWM frequency in Hz)
+    - Description: Sets the PWM frequency of PCA9685.
+    - توضیح: فرکانس PWM را تنظیم می‌کند.
+  - **set_pwm(self, channel, on, off)**
+    - Args: channel (PWM channel), on (pulse on time), off (pulse off time)
+    - Description: Sets on/off values for a specific PWM channel.
+    - توضیح: مقادیر on/off را برای یک کانال PWM تنظیم می‌کند.
+- **Class: ServoController**
+  - **__init__(self, i2c_scl=22, i2c_sda=21, channel=0, min_us=500, max_us=2500, freq=50)**
+    - Args: i2c_scl (SCL pin, default 22), i2c_sda (SDA pin, default 21), channel (PCA9685 channel, default 0), min_us (min pulse width in us, default 500), max_us (max pulse width in us, default 2500), freq (PWM frequency, default 50)
+    - Description: Initializes the servo controller. Creates a PCA9685 object and calculates min/max duty cycle.
+    - توضیح: کنترل‌کننده سروو را مقداردهی اولیه می‌کند و شیء PCA9685 می‌سازد و دیوتی سایکل را محاسبه می‌کند.
+  - **us_to_duty(self, us)**
+    - Args: us (pulse width in microseconds)
+    - Description: Converts pulse width to duty cycle for PCA9685.
+    - توضیح: پهنای پالس را به دیوتی سایکل تبدیل می‌کند.
+  - **angle_to_duty(self, angle)**
+    - Args: angle (servo angle, 0-180)
+    - Description: Converts angle to appropriate duty cycle for servo.
+    - توضیح: زاویه را به دیوتی سایکل مناسب سروو تبدیل می‌کند.
+  - **set_angle(self, angle)**
+    - Args: angle (desired servo angle)
+    - Description: Moves the servo to the specified angle.
+    - توضیح: سروو را به زاویه مورد نظر حرکت می‌دهد.
+
+## File: task_manager.py
+- **Class: TaskManager**
+  - **__init__(self, filename='tasks.json', max_tasks=20)**
+    - Args: filename (tasks file name, default 'tasks.json'), max_tasks (max number of tasks, default 20)
+    - Description: Initializes task manager. Loads tasks from file if exists.
+    - توضیح: مدیر تسک را مقداردهی اولیه می‌کند و تسک‌ها را از فایل می‌خواند.
+  - **_load_tasks(self)**
+    - Args: None
+    - Description: Loads tasks from JSON file.
+    - توضیح: تسک‌ها را از فایل JSON بارگذاری می‌کند.
+  - **_save_tasks(self)**
+    - Args: None
+    - Description: Saves current tasks to JSON file.
+    - توضیح: تسک‌های فعلی را در فایل ذخیره می‌کند.
+  - **add_task(self, date, time, device, duration)**
+    - Args: date (YYYY-MM-DD), time (HH:MM), device (device name, e.g. 'relay_1'), duration (seconds)
+    - Description: Adds a new task and saves it. Raises ValueError if max tasks reached.
+    - توضیح: یک تسک جدید اضافه می‌کند و ذخیره می‌کند. اگر تعداد تسک‌ها به حداکثر برسد خطا می‌دهد.
+  - **get_tasks(self)**
+    - Args: None
+    - Description: Returns list of all saved tasks.
+    - توضیح: لیست همه تسک‌های ذخیره شده را برمی‌گرداند.
+  - **delete_task(self, index)**
+    - Args: index (task index)
+    - Description: Deletes the specified task and saves changes. Returns True if successful, else False.
+    - توضیح: تسک مشخص شده را حذف و ذخیره می‌کند. در صورت موفقیت True برمی‌گرداند.
+
+  - **__init__(self, relay_controller, servo_controller)**
+    - Args: relay_controller (RelayController object), servo_controller (ServoController object)
+    - Description: Initializes web server with relay and servo controllers.
+    - توضیح: وب‌سرور را با کنترل‌کننده‌های رله و سروو مقداردهی اولیه می‌کند.
+  - **handle_request(self, reader, writer)**
+    - Args: reader (reader object), writer (writer object)
+    - Description: Asynchronously processes incoming HTTP requests. Parses path/params and performs relay/servo actions.
+    - توضیح: درخواست HTTP را به صورت آسنکرون پردازش و عملیات رله/سروو را انجام می‌دهد.
+  - **auto_off_relay(self, ch, duration)**
+    - Args: ch (relay channel), duration (seconds)
+    - Description: Creates an async task to turn off the relay after the specified duration.
+    - توضیح: یک تسک آسنکرون برای خاموش کردن رله بعد از مدت مشخص ایجاد می‌کند.
+  - **start(self)**
+    - Args: None
+    - Description: Starts the async web server on port 80 and listens for requests.
+    - توضیح: وب‌سرور آسنکرون را روی پورت ۸۰ اجرا می‌کند و منتظر درخواست می‌ماند.
+
+## File: wifi_manager.py
+- **Class: WiFiManager**
+  - **__init__(self, ssid, password, timeout=15, timezone_offset=3.5)**
+    - Args: ssid (WiFi SSID), password (WiFi password), timeout (seconds, default 15), timezone_offset (hours, default 3.5 for Tehran)
+    - Description: Initializes WiFi manager.
+    - توضیح: مدیر WiFi را مقداردهی اولیه می‌کند.
+  - **connect(self)**
+    - Args: None
+    - Description: Connects to the specified WiFi. Raises RuntimeError if fails after timeout. Syncs time after connection and returns IP.
+    - توضیح: به WiFi متصل می‌شود، در صورت عدم موفقیت خطا می‌دهد و پس از اتصال زمان را همگام می‌کند و IP را برمی‌گرداند.
+  - **sync_time(self)**
+    - Args: None
+    - Description: Syncs system time using `ntptime.settime()` and applies timezone offset.
+    - توضیح: زمان سیستم را با NTP همگام و با اختلاف زمانی تنظیم می‌کند.
+  - **is_connected(self)**
+    - Args: None
+    - Description: Checks WiFi connection status (True/False).
+    - توضیح: وضعیت اتصال WiFi را بررسی می‌کند.
+  - **get_ip(self)**
+    - Args: None
+    - Description: Returns device IP if connected, else None.
+    - توضیح: در صورت اتصال، IP دستگاه را برمی‌گرداند.
+
+

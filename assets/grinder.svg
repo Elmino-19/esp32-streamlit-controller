@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="5163.96"
+   height="5163.96"
+   viewBox="0 0 5163.96 5163.96"
+   sodipodi:docname="vecteezy_coffee-grinder-vector-icon-design_20147070-0.eps"
+   inkscape:export-filename="../../PycharmProjects/chiki/grinder.png"
+   inkscape:export-xdpi="2.3795693"
+   inkscape:export-ydpi="2.3795693"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(38729.7,0,0,-38729.7,0,19364.8)"
+       spreadMethod="pad"
+       id="linearGradient3">
+      <stop
+         style="stop-opacity:1;stop-color:#002a39"
+         offset="0"
+         id="stop2" />
+      <stop
+         style="stop-opacity:1;stop-color:#008696"
+         offset="1"
+         id="stop3" />
+    </linearGradient>
+    <linearGradient
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(31302.8,0,0,-31302.8,3729.94,19364.9)"
+       spreadMethod="pad"
+       id="linearGradient5">
+      <stop
+         style="stop-opacity:1;stop-color:#002a39"
+         offset="0"
+         id="stop4" />
+      <stop
+         style="stop-opacity:1;stop-color:#008696"
+         offset="1"
+         id="stop5" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:page
+       x="0"
+       y="0"
+       inkscape:label="1"
+       id="page1"
+       width="5163.96"
+       height="5163.96"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <g
+     id="g1"
+     inkscape:groupmode="layer"
+     inkscape:label="1">
+    <g
+       id="group-R5"
+       transform="matrix(0.78254437,0,0,0.7352071,572.92454,626.39753)">
+      <path
+         id="path2"
+         d="M 8596.35,38729.7 H 30133.3 c 4727.9,0 8596.4,-3868.4 8596.4,-8596.3 V 8596.4 C 38729.7,3868.5 34861.2,0 30133.3,0 H 8596.35 C 3868.39,0 0,3868.5 0,8596.4 v 21537 c 0,4727.9 3868.39,8596.3 8596.35,8596.3"
+         style="fill:url(#linearGradient3);fill-opacity:1;fill-rule:evenodd;stroke:none"
+         transform="matrix(0.13333333,0,0,-0.13333333,0,5163.96)" />
+      <path
+         id="path3"
+         d="m 10330.9,35610.6 h 18067.9 c 3966.6,0 7211.8,-3245.3 7211.8,-7211.8 V 10330.9 c 0,-3966.6 -3245.2,-7211.8 -7211.8,-7211.8 H 10330.9 c -3966.54,0 -7211.76,3245.2 -7211.76,7211.8 v 18067.9 c 0,3966.5 3245.22,7211.8 7211.76,7211.8"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         transform="matrix(0.13333333,0,0,-0.13333333,0,5163.96)" />
+      <path
+         id="path4"
+         d="m 11026.6,18637.4 -383,2083.8 h 12528.3 l -383.2,-2083.8 h -140.8 -11480.2 z m 7920.4,8055.9 v 926.6 h -4078.7 v -926.6 z m 9539.6,1813.1 H 24783 c -321.1,0 -580.9,259.9 -580.9,580.8 v 463.4 h -6713.7 v -769.1 h 2039.5 c 320.9,0 580.8,-259.9 580.8,-580.8 v -1507.4 h 3463.6 c 172.2,0 335.9,-76.6 446.2,-209.2 110.3,-132.5 156.2,-307.2 125.1,-476.8 l -865,-4705.3 H 10536.8 l -864.98,4705.3 c -31.32,169.7 14.48,344.3 124.99,476.8 110.31,132.6 273.89,209.2 446.29,209.2 h 3463.6 v 1507.4 c 0,320.9 259.9,580.8 580.8,580.8 h 2039.2 v 1349.9 c 0,321 260,580.8 580.9,580.8 h 7294.5 v 463.3 c 0,320.9 259.8,580.9 580.9,580.9 h 3703.6 c 320.9,0 581,-260 581,-580.9 v -2088.3 c 0,-320.9 -260.1,-580.8 -581,-580.8 z M 11167.7,18056.5 H 22786.9 L 24144,10493 c 19.7,-109.3 7.5,-222 -35.1,-324.4 L 22936.5,7332.3 c -90.1,-217.3 -301.8,-358.9 -537.1,-358.9 H 11415.8 c -235.2,0 -447,141.6 -536.9,358.7 l -1144.44,2768.1 h 6223.84 c 160.5,0 290.2,129.9 290.2,290.4 0,160.6 -129.8,290.4 -290.4,290.4 H 9705.11 l 1323.29,7375.5 h 139.3 v 0"
+         style="fill:url(#linearGradient5);fill-opacity:1;fill-rule:evenodd;stroke:none"
+         transform="matrix(0.13333333,0,0,-0.13333333,0,5163.96)" />
+    </g>
+  </g>
+</svg>

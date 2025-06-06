@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>motor-off.svg</file>
+    <file>pomp-off.svg</file>
+    <file>grinder-off.svg</file>
+    <file>grinder.png</file>
+    <file>grinder.svg</file>
+    <file>pomp1.svg</file>
+    <file>pomp1.png</file>
+    <file>pomp2.png</file>
+    <file>pomp2.svg</file>
+    <file>motor.png</file>
+    <file>pomp3.svg</file>
+    <file>pomp3.png</file>
+  </qresource>
+</RCC>

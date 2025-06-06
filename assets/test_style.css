@@ -1,0 +1,190 @@
+
+body {
+    direction: rtl;
+    font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif; /* استفاده از فونت وزیرمتن */
+    background-color: #e9ecef; /* پس‌زمینه کمی تیره‌تر و مدرن‌تر */
+    color: #212529; /* رنگ متن اصلی تیره‌تر برای کنتراست بهتر */
+    text-align: right; 
+}
+
+/* کانتینر اصلی برای محتوای برنامه */
+.main > div {
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 12px; /* گردی بیشتر گوشه‌ها */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* سایه واضح‌تر */
+    transition: box-shadow 0.3s ease-in-out;
+}
+.main > div:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* افکت هاور برای کانتینر اصلی */
+}
+
+h1, h2, h3, h4, h5, h6 { /* اعمال استایل به تمام سطوح عنوان */
+    color: #00509e; /* آبی پررنگ‌تر و مدرن‌تر */
+    border-bottom: 3px solid #007bff; /* خط زیرین آبی روشن‌تر و ضخیم‌تر */
+    padding-bottom: 8px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    text-align: right !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* سایه ملایم برای عنوان‌ها */
+}
+
+/* استایل‌دهی برای دکمه‌های عمومی Streamlit */
+.stButton > button {
+    width: 100%; 
+    padding: 12px 0; /* پدینگ بیشتر */
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border: none;
+    border-radius: 8px; /* گردی بیشتر */
+    background-color: #007bff; /* آبی اصلی برای دکمه‌ها */
+    color: #ffffff; /* متن سفید */
+    font-weight: bold;
+    font-size: 1rem; /* اندازه فونت کمی بزرگتر */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* سایه برای دکمه‌ها */
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.stButton > button:hover {
+    background-color: #0056b3; /* آبی تیره‌تر در هاور */
+    transform: translateY(-2px); /* افکت هاور برای جابجایی دکمه */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* سایه بیشتر در هاور */
+}
+.stButton > button:active {
+    transform: translateY(0px); /* بازگشت به حالت اولیه در کلیک */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+/* Add styles for consistent alignment of containers */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.container .stButton {
+    margin-top: auto;
+}
+
+.container .stDateInput, .container .stTimeInput, .container .stNumberInput {
+    margin-bottom: 10px;
+}
+[data-testid="stSidebarCollapsedControl"] {
+    display: none;
+}
+/* استایل‌دهی برای ویجت Toggle */
+[data-testid="stToggleButton"] {
+    margin-bottom: 10px; /* فاصله از پایین */
+}
+
+[data-testid="stToggleButton"] label div { /* لیبل داخل تاگل */
+    color: #343a40 !important; /* رنگ متن لیبل تاگل */
+    font-weight: 500;
+}
+
+/* استایل‌دهی اسلایدر */
+.stSlider {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+/* تغییر رنگ ترک اسلایدر */
+.stSlider [data-testid="stTickBarMin"], .stSlider [data-testid="stTickBarMax"] {
+    background: #adb5bd;
+}
+/* تغییر رنگ خود اسلایدر (thumb) */
+.stSlider [role="slider"] {
+    background-color: #007bff;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #007bff; /* ایجاد یک حاشیه دور thumb */
+}
+
+
+/* استایل‌دهی ورودی متن */
+.stTextInput input, .stNumberInput input { /* اعمال به هر دو نوع ورودی */
+    border-radius: 8px;
+    border: 1px solid #ced4da; /* خاکستری روشن‌تر برای حاشیه */
+    padding: 12px;
+    text-align: right; 
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.stTextInput input:focus, .stNumberInput input:focus {
+    border-color: #007bff; /* آبی در فوکوس */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* سایه آبی در فوکوس */
+}
+
+
+/* دکمه ارسال فرم در سایدبار */
+.stForm [data-testid="stFormSubmitButton"] button {
+    background-color: #28a745; /* سبز برای ارسال فرم */
+    color: white;
+}
+.stForm [data-testid="stFormSubmitButton"] button:hover {
+    background-color: #218838; /* سبز تیره‌تر */
+}
+
+/* استایل برای کانتینرهای دستگاه‌ها در صفحه کنترل مستقیم */
+[data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > div[data-testid^="stVerticalBlock"] > [data-testid="stVerticalBlock"] {
+    /* این انتخابگر پیچیده برای هدف قرار دادن کانتینرهای داخلی ستون‌ها است */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 10px; /* گرد کردن گوشه کانتینر دستگاه */
+}
+
+[data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > div[data-testid^="stVerticalBlock"] > [data-testid="stVerticalBlock"]:hover {
+    transform: translateY(-5px); /* کمی بالا بردن کانتینر دستگاه در هاور */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* سایه بیشتر برای تاکید */
+}
+
+
+[data-testid="stImageContainer"] img { /* استایل برای تصاویر دستگاه‌ها */
+    display: block; /* برای امکان margin auto */
+    margin: 10px auto; /* پدینگ بالا و پایین و وسط‌چین کردن افقی */
+    max-width: 100%; /* اطمینان از اینکه تصویر از کانتینر بیرون نمی‌زند */
+    height: auto; /* حفظ نسبت تصویر */
+    border-radius: 5px; /* کمی گرد کردن گوشه تصاویر */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* سایه ملایم برای تصاویر */
+    transition: transform 0.2s ease-in-out;
+}
+[data-testid="stImageContainer"] img:hover {
+    transform: scale(1.05); /* کمی بزرگنمایی تصویر در هاور */
+}
+
+
+/* تضمین راست‌چین بودن محتوای سایدبار */
+[data-testid="stSidebar"] * {
+    text-align: right;
+}
+[data-testid="stSidebar"] .stTextInput label, 
+[data-testid="stSidebar"] .stNumberInput label {
+    text-align: right !important; 
+}
+[data-testid="stSidebar"] .stTextInput input {
+    text-align: left; /* آدرس IP چپ‌چین */
+}
+
+/* محتوای Markdown از وضعیت */
+.stMarkdown {
+    text-align: right;
+    background-color: #f8f9fa; /* پس‌زمینه روشن برای بخش وضعیت */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    margin-top: 10px;
+}
+
+/* استایل برای پیام‌های موفقیت و خطا */
+[data-testid="stNotificationContentSuccess"] {
+    font-weight: bold;
+    color: #155724; /* رنگ متن موفقیت */
+}
+[data-testid="stNotificationContentError"] {
+    font-weight: bold;
+    color: #721c24; /* رنگ متن خطا */
+}
+[data-testid="stNotificationContentWarning"] {
+    font-weight: bold;
+    color: #856404; /* رنگ متن هشدار */
+}
+
+/* حذف خطوط اضافی انتخابگرهای قبلی که ممکن است دیگر دقیق نباشند */
+/* [data-testid="stHeading"] * { ... } */
+/* [data-testid="stImageContainer"]* { ... } */
