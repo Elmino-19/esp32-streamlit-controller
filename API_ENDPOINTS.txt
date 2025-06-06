@@ -1,0 +1,400 @@
+ESP32 IoT Control System - Complete API Endpoints Documentation
+==================================================================
+
+Base URL: http://[ESP32_IP_ADDRESS]/
+
+==================================================================
+DEVICE CONTROL ENDPOINTS
+==================================================================
+
+1. RELAY/PUMP CONTROL
+--------------------
+
+1.1 Turn ON Relay/Pump (Instant)
+Endpoint: GET /relay/{channel}/on
+Parameters:
+  - channel: 0, 1, 2, 3
+    * 0: Pump 1 (Water Pump 1)
+    * 1: Pump 2 (Water Pump 2) 
+    * 2: Pump 3 (Water Pump 3)
+    * 3: DC Motor (Grinder)
+
+Examples:
+  - Turn ON Pump 1: GET /relay/0/on
+  - Turn ON Pump 2: GET /relay/1/on
+  - Turn ON Pump 3: GET /relay/2/on
+  - Turn ON DC Motor: GET /relay/3/on
+
+Response Format:
+{
+  "status": "success",
+  "message": "Relay {channel} turned ON"
+}
+
+1.2 Turn OFF Relay/Pump (Instant)
+Endpoint: GET /relay/{channel}/off
+Parameters:
+  - channel: 0, 1, 2, 3
+
+Examples:
+  - Turn OFF Pump 1: GET /relay/0/off
+  - Turn OFF Pump 2: GET /relay/1/off
+  - Turn OFF Pump 3: GET /relay/2/off
+  - Turn OFF DC Motor: GET /relay/3/off
+
+Response Format:
+{
+  "status": "success",
+  "message": "Relay {channel} turned OFF"
+}
+
+1.3 Turn ON with Auto-OFF Timer (Timed Operation)
+Endpoint: GET /relay/{channel}/on?duration={seconds}
+Parameters:
+  - channel: 0, 1, 2, 3
+  - duration: 1-300 seconds (5 minutes max for safety)
+
+Examples:
+  - Pump 1 for 30 seconds: GET /relay/0/on?duration=30
+  - Pump 2 for 60 seconds: GET /relay/1/on?duration=60
+  - Pump 3 for 120 seconds: GET /relay/2/on?duration=120
+  - DC Motor for 45 seconds: GET /relay/3/on?duration=45
+
+Response Format:
+{
+  "status": "success",
+  "message": "Relay {channel} turned ON for {duration} seconds"
+}
+
+==================================================================
+SERVO MOTOR CONTROL
+==================================================================
+
+2. SERVO POSITIONING
+-------------------
+
+2.1 Set Servo Angle (Instant)
+Endpoint: GET /servo/{angle}
+Parameters:
+  - angle: 0-180 degrees
+
+Examples:
+  - Set to 0 degrees: GET /servo/0
+  - Set to 45 degrees: GET /servo/45
+  - Set to 90 degrees: GET /servo/90
+  - Set to 135 degrees: GET /servo/135
+  - Set to 180 degrees: GET /servo/180
+
+Response Format:
+{
+  "status": "success",
+  "message": "Servo set to {angle} degrees"
+}
+
+==================================================================
+SYSTEM STATUS AND MONITORING
+==================================================================
+
+3. SYSTEM STATUS
+---------------
+
+3.1 Get System Status
+Endpoint: GET /status
+
+Response Format:
+{
+  "status": "success",
+  "time": {
+    "year": 2024,
+    "month": 6,
+    "day": 6,
+    "hour": 14,
+    "minute": 30,
+    "second": 45,
+    "formatted": "2024/06/06 14:30:45"
+  },
+  "devices": {
+    "relays": "operational",
+    "servo": "operational"
+  },
+  "memory": {
+    "free": 95432,
+    "used": 36584
+  },
+  "uptime": 3600
+}
+
+==================================================================
+TASK SCHEDULING (Future Implementation)
+==================================================================
+
+4. SCHEDULED TASKS
+-----------------
+
+4.1 Add Scheduled Task
+Endpoint: POST /task/add
+Content-Type: application/json
+
+Request Body:
+{
+  "device": "pump1|pump2|pump3|dcmotor",
+  "date": "YYYY-MM-DD",
+  "time": "HH:MM",
+  "duration": 30
+}
+
+Examples:
+{
+  "device": "pump1",
+  "date": "2024-06-07",
+  "time": "08:30",
+  "duration": 60
+}
+
+4.2 Get All Tasks
+Endpoint: GET /task/list
+
+Response Format:
+{
+  "status": "success",
+  "tasks": [
+    {
+      "id": 0,
+      "device": "pump1",
+      "date": "2024-06-07",
+      "time": "08:30",
+      "duration": 60
+    }
+  ]
+}
+
+4.3 Delete Task
+Endpoint: DELETE /task/delete/{task_id}
+
+==================================================================
+COMPLETE USAGE EXAMPLES
+==================================================================
+
+SCENARIO 1: Manual Device Control
+---------------------------------
+1. Turn on Pump 1: GET /relay/0/on
+2. Wait for operation...
+3. Turn off Pump 1: GET /relay/0/off
+
+SCENARIO 2: Timed Operation
+--------------------------
+1. Turn on Pump 2 for 2 minutes: GET /relay/1/on?duration=120
+2. Device automatically turns off after 120 seconds
+
+SCENARIO 3: Servo Control
+------------------------
+1. Move servo to center: GET /servo/90
+2. Move servo to left: GET /servo/0
+3. Move servo to right: GET /servo/180
+
+SCENARIO 4: System Monitoring
+----------------------------
+1. Check system status: GET /status
+2. Monitor device states and time
+
+==================================================================
+DEVICE MAPPING
+==================================================================
+
+Channel 0 (Relay 0): Pump 1 - Water Pump 1
+  - GPIO Pin: 13
+  - Max Duration: 300 seconds
+  - Use Case: Primary water pumping
+
+Channel 1 (Relay 1): Pump 2 - Water Pump 2  
+  - GPIO Pin: 12
+  - Max Duration: 300 seconds
+  - Use Case: Secondary water pumping
+
+Channel 2 (Relay 2): Pump 3 - Water Pump 3
+  - GPIO Pin: 14
+  - Max Duration: 300 seconds
+  - Use Case: Tertiary water pumping
+
+Channel 3 (Relay 3): DC Motor - Grinder
+  - GPIO Pin: 27
+  - Max Duration: 300 seconds
+  - Use Case: Material grinding/processing
+
+Servo Motor: Positioning Control
+  - I2C SDA: GPIO 21
+  - I2C SCL: GPIO 22
+  - PCA9685 Channel: 0
+  - Range: 0-180 degrees
+  - Use Case: Directional control/positioning
+
+==================================================================
+ERROR RESPONSES
+==================================================================
+
+Invalid Channel:
+{
+  "status": "error",
+  "message": "Invalid channel number"
+}
+
+Invalid Duration:
+{
+  "status": "error", 
+  "message": "Duration must be between 1 and 300 seconds"
+}
+
+Invalid Servo Angle:
+{
+  "status": "error",
+  "message": "Angle must be between 0 and 180 degrees"
+}
+
+Hardware Error:
+{
+  "status": "error",
+  "message": "Hardware communication failed"
+}
+
+==================================================================
+CURL COMMAND EXAMPLES
+==================================================================
+
+# Turn on Pump 1
+curl -X GET "http://192.168.1.100/relay/0/on"
+
+# Turn on Pump 2 for 30 seconds
+curl -X GET "http://192.168.1.100/relay/1/on?duration=30"
+
+# Turn off DC Motor
+curl -X GET "http://192.168.1.100/relay/3/off"
+
+# Set servo to 90 degrees
+curl -X GET "http://192.168.1.100/servo/90"
+
+# Get system status
+curl -X GET "http://192.168.1.100/status"
+
+==================================================================
+PYTHON REQUESTS EXAMPLES
+==================================================================
+
+import requests
+
+# ESP32 IP address
+esp32_ip = "192.168.1.100"
+base_url = f"http://{esp32_ip}"
+
+# Turn on Pump 1
+response = requests.get(f"{base_url}/relay/0/on")
+print(response.json())
+
+# Turn on Pump 2 for 45 seconds
+response = requests.get(f"{base_url}/relay/1/on?duration=45")
+print(response.json())
+
+# Set servo to 135 degrees
+response = requests.get(f"{base_url}/servo/135")
+print(response.json())
+
+# Get system status
+response = requests.get(f"{base_url}/status")
+print(response.json())
+
+# Turn off all devices
+for channel in range(4):
+    requests.get(f"{base_url}/relay/{channel}/off")
+
+==================================================================
+JAVASCRIPT/FETCH EXAMPLES
+==================================================================
+
+const esp32IP = "192.168.1.100";
+const baseURL = `http://${esp32IP}`;
+
+// Turn on Pump 1
+fetch(`${baseURL}/relay/0/on`)
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+// Turn on Pump 3 for 2 minutes
+fetch(`${baseURL}/relay/2/on?duration=120`)
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+// Set servo to 45 degrees
+fetch(`${baseURL}/servo/45`)
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+// Get system status
+fetch(`${baseURL}/status`)
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+==================================================================
+SAFETY CONSIDERATIONS
+==================================================================
+
+1. Maximum Duration Limits:
+   - All devices: 300 seconds (5 minutes) maximum
+   - Prevents device overheating and damage
+
+2. Automatic Shutdown:
+   - Timed operations automatically turn off
+   - Manual override available with /off endpoints
+
+3. Concurrent Operations:
+   - Multiple devices can operate simultaneously
+   - Each device has independent timer control
+
+4. Error Handling:
+   - Invalid parameters return error messages
+   - Hardware failures are logged and reported
+
+5. Memory Management:
+   - Automatic garbage collection
+   - Low memory warnings and cleanup
+
+==================================================================
+NETWORK CONFIGURATION
+==================================================================
+
+Default Settings:
+- Server Port: 80 (HTTP)
+- Max Concurrent Connections: 5
+- Request Timeout: 30 seconds
+- Response Format: JSON
+
+WiFi Configuration (in config.py):
+WIFI_CONFIG = {
+    'ssid': 'Your_WiFi_Name',
+    'password': 'Your_WiFi_Password',
+    'timeout': 10,
+    'timezone_offset': 3.5
+}
+
+==================================================================
+TROUBLESHOOTING
+==================================================================
+
+Connection Issues:
+1. Verify ESP32 IP address
+2. Check WiFi connectivity
+3. Ensure devices are on same network
+
+API Not Responding:
+1. Check ESP32 power and status
+2. Verify web server is running
+3. Check for hardware errors
+
+Device Control Problems:
+1. Verify GPIO connections
+2. Check relay module power
+3. Test individual components
+
+==================================================================
+
+Generated by Copilot - Complete API Documentation
+Last Updated: June 6, 2024
+Version: 1.0.0
